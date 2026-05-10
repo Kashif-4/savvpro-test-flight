@@ -1,56 +1,63 @@
-# Step-by-Step Guide: How to Fork, Clone, and Submit Your Assessment
+# ✈️ FlightHub
 
-Follow these instructions to participate in the test.
+## Overview
+FlightHub is a modern, full-stack flight search and booking system built as an internal tool for a small travel agency. It provides staff with an intuitive interface to search available flights, book passenger seats with immediate confirmation, and manage existing reservations.
 
-### 1. **Fork the Repository**
-1. Go to the repository: [https://github.com/savvpro/savvpro-test-flight](https://github.com/savvpro/savvpro-test-flight)
-2. In the top-right corner of the page, click the **Fork** button.
-3. This will create a copy of the repository in your GitHub account.
+## Setup Instructions
 
-### 2. **Clone Your Fork**
-1. After forking, go to your GitHub account and open your **forked repository**.
-2. Click on the green **Code** button and copy the URL.
-3. Open your terminal and run the following command to clone your fork:
+### Backend Setup
+1. Open a terminal and navigate to the backend directory:
    ```bash
-   git clone https://github.com/your-username/savvpro-test-flight.git
+   cd backend
    ```
-4. Navigate into the cloned directory:
+2. Create and activate a Python virtual environment:
    ```bash
-   cd savvpro-test-flight
+   # On Windows
+   python -m venv venv
+   .\venv\Scripts\activate
+   
+   # On macOS/Linux
+   python -m venv venv
+   source venv/bin/activate
    ```
-
-### 3. **Read the Task**
-1. Open and read [`TASK.md`](https://github.com/savvpro/savvpro-test-flight/blob/main/TASK.md) carefully before writing any code.
-
-### 4. **Create a New Branch**
-1. Before making any changes, create a new branch using the following naming pattern:
-   ```
-   candidate-<your-github-username>
-   ```
-   Run:
+3. Install the dependencies:
    ```bash
-   git checkout -b candidate-<your-github-username>
+   pip install -r requirements.txt
    ```
-   **Example:**
+4. Seed the database with sample flight data:
    ```bash
-   git checkout -b candidate-johndoe
+   python seed.py
    ```
 
-### 5. **Complete the Task**
-Build the full application on your branch. 
-
-### 6. **Push Your Branch**
-1. Commit your final changes:
+### Frontend Setup
+1. Open a new terminal and navigate to the frontend directory:
    ```bash
-   git add .
-   git commit -m "feat: complete FlightHub assessment"
+   cd frontend
    ```
-2. Push your branch to your fork:
+2. Install the required Node.js packages:
    ```bash
-   git push origin candidate-<your-github-username>
+   npm install
    ```
 
----
+## Execution
 
-### **Important Notes**
-- **No submissions will be accepted after the deadline.**
+To run the full application, you need to start both the backend and frontend servers in separate terminal windows.
+
+### 1. Run the Backend Server
+From the `backend` directory (with your virtual environment activated):
+```bash
+uvicorn main:app --reload --port 8000
+```
+*The backend API will be available at http://localhost:8000*
+
+### 2. Run the Frontend Server
+From the `frontend` directory:
+```bash
+npm run dev
+```
+*The frontend application will be available at http://localhost:3000*
+
+## Assumptions & Design Decisions
+- **Internal Tool Environment:** We assumed FlightHub operates as a single-user or small team internal tool, hence there is no complex authentication or multi-tenant setup.
+- **CORS Management via Proxy:** To bypass CORS issues and keep the frontend and backend integrated smoothly, the Express frontend server is configured to proxy all `/api` requests to the FastAPI backend.
+- **Database:** SQLite is used as the primary database, eliminating the need for a separate database server.

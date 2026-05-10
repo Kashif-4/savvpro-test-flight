@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlightHub</title>
+    <!-- Pico.css framework -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="container-fluid premium-nav">
+        <ul>
+            <li><strong><a href="#" class="brand-logo">✈️ FlightHub</a></strong></li>
+        </ul>
+        <ul>
+            <li><a href="#search" class="nav-link">Search</a></li>
+            <li><a href="#lookup" class="nav-link">My Bookings</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <!-- Hero Search Section -->
+        <section id="search" class="hero-search">
+            <h1 class="hero-title">Find Your Next Adventure</h1>
+            <p class="hero-subtitle">Discover premium flights to destinations worldwide.</p>
+            <form id="search-form" class="search-form-grid">
+                <div>
+                    <label for="origin">Origin (IATA)</label>
+                    <input type="text" id="origin" name="origin" placeholder="e.g. LHR" maxlength="3">
+                </div>
+                <div>
+                    <label for="destination">Destination (IATA)</label>
+                    <input type="text" id="destination" name="destination" placeholder="e.g. JFK" maxlength="3">
+                </div>
+                <div>
+                    <label for="date">Departure Date</label>
+                    <input type="date" id="date" name="date">
+                </div>
+                <div class="search-btn-container">
+                    <button type="submit" class="primary-btn">Search Flights</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results" class="results-section">
+            <h2 class="section-title">Available Flights</h2>
+            <div id="flights-container" class="cards-grid">
+                <!-- Flight cards injected here via JS -->
+            </div>
+            <div id="flights-error" class="error-msg" style="display: none;"></div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Booking Lookup Section -->
+        <section id="lookup" class="lookup-section">
+            <h2 class="section-title">Manage Your Booking</h2>
+            <form id="lookup-form" class="lookup-form-grid">
+                <div style="flex-grow: 1;">
+                    <label for="lookup-query">Booking Reference or Passenger Name</label>
+                    <input type="text" id="lookup-query" name="lookup-query" placeholder="e.g. FH-ABCD or Jane Doe" required>
+                </div>
+                <div class="lookup-btn-container">
+                    <button type="submit" class="secondary-btn">Find Booking</button>
+                </div>
+            </form>
+            <div id="bookings-container" class="cards-grid">
+                <!-- Booking cards injected here via JS -->
+            </div>
+            <div id="lookup-error" class="error-msg" style="display: none;"></div>
+        </section>
+    </main>
+
+    <!-- Booking Modal -->
+    <dialog id="booking-modal">
+        <article class="modal-content">
+            <header>
+                <button aria-label="Close" rel="prev" class="close-modal" id="close-modal-top"></button>
+                <h3>Complete Your Booking</h3>
+            </header>
+            <form id="booking-form">
+                <input type="hidden" id="modal-flight-id" name="flight_id">
+                <div class="flight-summary" id="modal-flight-summary">
+                    <!-- Flight summary info -->
+                </div>
+                
+                <label for="passenger_name">Passenger Name</label>
+                <input type="text" id="passenger_name" name="passenger_name" required minlength="2" placeholder="Jane Doe">
+                
+                <label for="passport_number">Passport Number</label>
+                <input type="text" id="passport_number" name="passport_number" required minlength="5" placeholder="AB123456">
+                
+                <label for="seat_number">Seat Number</label>
+                <input type="text" id="seat_number" name="seat_number" required pattern="^\d{1,2}[A-F]$" placeholder="14A (e.g. 1A to 99F)">
+                
+                <div id="booking-error" class="error-msg" style="display: none;"></div>
+                <div id="booking-success" class="success-msg" style="display: none;"></div>
+
+                <footer class="modal-footer">
+                    <button type="button" class="secondary-btn" id="close-modal-btn">Cancel</button>
+                    <button type="submit" class="primary-btn" id="submit-booking-btn">Confirm Booking</button>
+                </footer>
+            </form>
+        </article>
+    </dialog>
+
+    <script src="app.js"></script>
+</body>
+</html>
