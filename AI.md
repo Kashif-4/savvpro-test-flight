@@ -27,3 +27,15 @@ Prompt: Directed AI to create Pydantic v2 schemas and a seeding script with 10 f
 Output Quality: 4/5 — Schemas correctly use regex for seat numbers and from_attributes config.
 
 Corrections: I noticed the AI used basic strings for the departure dates in the seed script. I directed it to use Python `datetime` objects for better SQLAlchemy compatibility. I also ensured the seat regex was strictly enforced in `schemas.py` to prevent invalid data entry. also tested seed.py and queried databse and it worked as expected .
+
+
+Task 4 — CRUD Layer
+Tool: Gemini 3 Flash
+
+Prompt: Provided Part 6 atomic pseudocode and requested implementation of 5 CRUD functions with row-level locking.
+
+Output Quality: 5/5 — Implemented all 5 functions with .with_for_update() row locking to prevent race conditions as specified.
+
+Corrections: Initially used relative imports which would fail if the backend is not run as a package. Fixed imports to use absolute-style names consistent with the rest of the backend codebase. I prioritized the use of .with_for_update() for the create_booking function. I verified that the AI implemented a while loop for the reference generator to handle potential ID collisions, ensuring 100% uniqueness for booking references. I also ensured that cancel_booking restores seat counts to the flight table.
+
+Note on Environment: Encountered a persistent IDE pathing issue where the Antigravity/VS Code linter failed to recognize the venv interpreter despite successful terminal execution. I manually configured .vscode/settings.json to point to the virtual environment and confirmed that all pytest and seed operations remained functional in the CLI. This ensured that environment-specific "missing import" ghosts did not stall development progress.
