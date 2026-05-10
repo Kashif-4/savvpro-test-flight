@@ -2,6 +2,7 @@
 
 ## Overview
 FlightHub is a modern, full-stack flight search and booking system built as an internal tool for a small travel agency. It provides staff with an intuitive interface to search available flights, book passenger seats with immediate confirmation, and manage existing reservations.
+<img width="1897" height="902" alt="image" src="https://github.com/user-attachments/assets/d5bcd305-987c-4bf0-b4c8-feb1c6eb0fdb" />
 
 ## Setup Instructions
 
