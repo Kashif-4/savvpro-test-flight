@@ -1,7 +1,7 @@
 {
   "name": "flighthub-frontend",
   "version": "1.0.0",
-  "description": "FlightHub Assessment Frontend",
+  "description": "Express server for FlightHub frontend with API proxying",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -13,5 +13,7 @@
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
-  }
+  },
+  "author": "",
+  "license": "ISC"
 }
