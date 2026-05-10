@@ -17,3 +17,13 @@ Output Quality: 5/5 — correct SQLAlchemy 2.x session pattern, relationships, a
 
 Corrections: None required. Verified with Base.metadata.create_all(engine) → "DB tables created OK" and flighthub.db created on disk.
 
+
+
+Task 3 — Pydantic Schemas & Seed Data
+Tool: Gemini 3 Flash
+
+Prompt: Directed AI to create Pydantic v2 schemas and a seeding script with 10 flights based on @MTS.md.
+
+Output Quality: 4/5 — Schemas correctly use regex for seat numbers and from_attributes config.
+
+Corrections: I noticed the AI used basic strings for the departure dates in the seed script. I directed it to use Python `datetime` objects for better SQLAlchemy compatibility. I also ensured the seat regex was strictly enforced in `schemas.py` to prevent invalid data entry. also tested seed.py and queried databse and it worked as expected .
