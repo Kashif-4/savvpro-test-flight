@@ -39,3 +39,13 @@ Output Quality: 5/5 — Implemented all 5 functions with .with_for_update() row 
 Corrections: Initially used relative imports which would fail if the backend is not run as a package. Fixed imports to use absolute-style names consistent with the rest of the backend codebase. I prioritized the use of .with_for_update() for the create_booking function. I verified that the AI implemented a while loop for the reference generator to handle potential ID collisions, ensuring 100% uniqueness for booking references. I also ensured that cancel_booking restores seat counts to the flight table.
 
 Note on Environment: Encountered a persistent IDE pathing issue where the Antigravity/VS Code linter failed to recognize the venv interpreter despite successful terminal execution. I manually configured .vscode/settings.json to point to the virtual environment and confirmed that all pytest and seed operations remained functional in the CLI. This ensured that environment-specific "missing import" ghosts did not stall development progress.
+
+
+Task 5 — FastAPI Routers
+Tool: Gemini 3 Flash (in a new chat)
+
+Prompt: Directed the creation of routers and main.py based on the API contract in @MTS.md.
+
+Output Quality: 5/5
+
+Direction/Correction: I ensured the AI used the lifespan event for database initialization instead of the deprecated @app.on_event pattern. I also verified that the GET /bookings route correctly enforces a requirement for at least one search filter to prevent empty queries.
